@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entity\ListaCompras;
+use App\Models\Facade\ConsultarListaDB;
 use App\Models\Regras\ListaComprasRegras;
 use Exception;
 use Illuminate\Http\Request;
@@ -25,5 +26,9 @@ class ListaComprasController extends Controller
         } catch (Exception $ex) {
             return response()->json(["message" => $ex->getMessage()]);
         }
+    }
+    public function create()
+    {
+        return ConsultarListaDB::todasListas();
     }
 }

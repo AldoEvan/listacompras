@@ -11,13 +11,16 @@ class ListaComprasRegras
     {
         $listaCompras = new ListaCompras();
         $listaCompras->email = $request->email;
-        $listaCompras->data = Carbon::createFromFormat("d/m/Y", $request->data) ;
+        $listaCompras->data = Carbon::createFromFormat("d/m/Y", $request->data)->format('d-m-Y');
         $listaCompras->total_item = $request->totalItem;
         $listaCompras->total_preco = $request->totalPreco;
-        $listaCompras->save();
-        if(isset($request->produto)){
-            ProdutosRegras::salvar($request->produto, $listaCompras->_id);
+        $produtos = [];
+        foreach ($request->produtos as $produto) {
+            $produtos[] = $produto;
         }
+        $listaCompras->produtos = $produtos;
+        $listaCompras->save();
+        
     }
 
 }

@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/salvar', [ListaComprasController::class, 'store']);
+Route::get('/consultar', [ListaComprasController::class, 'create']);
 
